@@ -19,3 +19,4 @@ __used
 __attribute__((section(".modinfo"))) =
 "depends=";
 
+MODULE_ALIAS("i2c:ds92lx1622");

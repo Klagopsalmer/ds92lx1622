@@ -2,6 +2,7 @@ cmd_/home/schnegg/workspace/ds92lx1622/main.o := ~/armadeus/buildroot/output/hos
 
 deps_/home/schnegg/workspace/ds92lx1622/main.o := \
   /home/schnegg/workspace/ds92lx1622/main.c \
+  /home/schnegg/workspace/ds92lx1622/ds92lx1622.h \
   include/linux/module.h \
     $(wildcard include/config/modules.h) \
     $(wildcard include/config/modversions.h) \
@@ -265,6 +266,120 @@ deps_/home/schnegg/workspace/ds92lx1622/main.o := \
   /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/local.h \
   include/asm-generic/local.h \
   /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/module.h \
+  include/linux/i2c.h \
+    $(wildcard include/config/i2c/boardinfo.h) \
+  include/linux/i2c-id.h \
+  include/linux/mod_devicetable.h \
+  include/linux/device.h \
+    $(wildcard include/config/debug/devres.h) \
+  include/linux/ioport.h \
+  include/linux/klist.h \
+  include/linux/pm.h \
+    $(wildcard include/config/pm/sleep.h) \
+  include/linux/semaphore.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/device.h \
+    $(wildcard include/config/dmabounce.h) \
+  include/linux/pm_wakeup.h \
+    $(wildcard include/config/pm.h) \
+  include/linux/sched.h \
+    $(wildcard include/config/sched/debug.h) \
+    $(wildcard include/config/no/hz.h) \
+    $(wildcard include/config/detect/softlockup.h) \
+    $(wildcard include/config/core/dump/default/elf/headers.h) \
+    $(wildcard include/config/bsd/process/acct.h) \
+    $(wildcard include/config/taskstats.h) \
+    $(wildcard include/config/audit.h) \
+    $(wildcard include/config/inotify/user.h) \
+    $(wildcard include/config/epoll.h) \
+    $(wildcard include/config/posix/mqueue.h) \
+    $(wildcard include/config/keys.h) \
+    $(wildcard include/config/user/sched.h) \
+    $(wildcard include/config/schedstats.h) \
+    $(wildcard include/config/task/delay/acct.h) \
+    $(wildcard include/config/fair/group/sched.h) \
+    $(wildcard include/config/rt/group/sched.h) \
+    $(wildcard include/config/blk/dev/io/trace.h) \
+    $(wildcard include/config/cc/stackprotector.h) \
+    $(wildcard include/config/x86/ptrace/bts.h) \
+    $(wildcard include/config/sysvipc.h) \
+    $(wildcard include/config/auditsyscall.h) \
+    $(wildcard include/config/rt/mutexes.h) \
+    $(wildcard include/config/task/xacct.h) \
+    $(wildcard include/config/cpusets.h) \
+    $(wildcard include/config/cgroups.h) \
+    $(wildcard include/config/futex.h) \
+    $(wildcard include/config/fault/injection.h) \
+    $(wildcard include/config/latencytop.h) \
+    $(wildcard include/config/function/graph/tracer.h) \
+    $(wildcard include/config/tracing.h) \
+    $(wildcard include/config/have/unstable/sched/clock.h) \
+    $(wildcard include/config/preempt/bkl.h) \
+    $(wildcard include/config/group/sched.h) \
+    $(wildcard include/config/mm/owner.h) \
+  include/linux/capability.h \
+    $(wildcard include/config/security/file/capabilities.h) \
+  include/linux/timex.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/timex.h \
+  arch/arm/plat-mxc/include/mach/timex.h \
+  include/linux/jiffies.h \
+  include/linux/rbtree.h \
+  include/linux/mm_types.h \
+    $(wildcard include/config/split/ptlock/cpus.h) \
+    $(wildcard include/config/proc/fs.h) \
+    $(wildcard include/config/mmu/notifier.h) \
+  include/linux/auxvec.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/auxvec.h \
+  include/linux/prio_tree.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/mmu.h \
+    $(wildcard include/config/cpu/has/asid.h) \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/cputime.h \
+  include/asm-generic/cputime.h \
+  include/linux/sem.h \
+  include/linux/ipc.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/ipcbuf.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/sembuf.h \
+  include/linux/signal.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/signal.h \
+  include/asm-generic/signal.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/sigcontext.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/siginfo.h \
+  include/asm-generic/siginfo.h \
+  include/linux/fs_struct.h \
+  include/linux/path.h \
+  include/linux/pid.h \
+  include/linux/proportions.h \
+  include/linux/percpu_counter.h \
+  include/linux/seccomp.h \
+    $(wildcard include/config/seccomp.h) \
+  include/linux/rtmutex.h \
+    $(wildcard include/config/debug/rt/mutexes.h) \
+  include/linux/plist.h \
+    $(wildcard include/config/debug/pi/list.h) \
+  include/linux/resource.h \
+  /home/schnegg/armadeus/buildroot/output/build/linux-2.6.29.6/arch/arm/include/asm/resource.h \
+  include/asm-generic/resource.h \
+  include/linux/timer.h \
+    $(wildcard include/config/timer/stats.h) \
+    $(wildcard include/config/debug/objects/timers.h) \
+  include/linux/ktime.h \
+    $(wildcard include/config/ktime/scalar.h) \
+  include/linux/debugobjects.h \
+    $(wildcard include/config/debug/objects/free.h) \
+  include/linux/hrtimer.h \
+    $(wildcard include/config/high/res/timers.h) \
+  include/linux/task_io_accounting.h \
+    $(wildcard include/config/task/io/accounting.h) \
+  include/linux/latencytop.h \
+  include/linux/cred.h \
+    $(wildcard include/config/security.h) \
+  include/linux/key.h \
+    $(wildcard include/config/sysctl.h) \
+  include/linux/sysctl.h \
+  include/linux/aio.h \
+    $(wildcard include/config/aio.h) \
+  include/linux/workqueue.h \
+  include/linux/aio_abi.h \
+  include/linux/uio.h \
 
 /home/schnegg/workspace/ds92lx1622/main.o: $(deps_/home/schnegg/workspace/ds92lx1622/main.o)
 
