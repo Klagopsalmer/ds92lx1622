@@ -1,12 +1,12 @@
 ifneq ($(KERNELRELEASE),)
-obj-m += ex2driver.o
-ex2driver-objs:= main.o
+obj-m += ds92lx1622.o
+ds92lx1622-objs:= main.o
 else
-KDIR := ~/workspace/buildroot/output/build/linux-3.7.9/
+KDIR := ~/armadeus/buildroot/output/build/linux-2.6.29.6/
 CPU := arm
-TOOLS := ~/workspace/buildroot/output/host/usr/bin/arm-linux-
+TOOLS := ~/armadeus/buildroot/output/host/usr/bin/arm-linux-
 PWD := $(shell pwd)
-MODPATH := /tftpboot/apf27-root
+MODPATH := ~/armadeus/buildroot/output/images/apf27-root
 all: 
 	$(MAKE) -C $(KDIR) M=$(PWD) ARCH=$(CPU) CROSS_COMPILE=$(TOOLS) modules
 clean:
