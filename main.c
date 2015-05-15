@@ -68,6 +68,12 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 		pr_err("error ALIAS_ID\n");
 	}
 
+	//Disable nack timeout
+//	if (0 > i2c_smbus_write_byte_data(client, 0x6, 0x08))
+//	{
+//		pr_err("error nack\n");
+//	}
+
 	temp = i2c_smbus_read_byte_data(client, TARGET_ID_O_REG_ADDR);
 	if (temp > 0)
 	{
@@ -91,22 +97,22 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 	{
 		pr_err("error wake 2\n");
 	}
-/*
-	do
-	{
-		temp = i2c_smbus_read_byte_data(client, 0x1c);
-		if (temp > 0)
-		{
-			pr_info("lock: %d\n", temp);
-		}
-		else
-		{
-			pr_err("error lock\n");
-		}
-		i++;
-		mdelay(2000);
-	} while (!(temp & 0x1) && i <= 5);
-*/
+	/*
+	 do
+	 {
+	 temp = i2c_smbus_read_byte_data(client, 0x1c);
+	 if (temp > 0)
+	 {
+	 pr_info("lock: %d\n", temp);
+	 }
+	 else
+	 {
+	 pr_err("error lock\n");
+	 }
+	 i++;
+	 mdelay(2000);
+	 } while (!(temp & 0x1) && i <= 5);
+	 */
 	return 0;
 }
 
@@ -116,11 +122,11 @@ static int ds92lx1622_remove(struct i2c_client *client)
 	return 0;
 }
 
-static const struct of_device_id ds92lx1622_camera_of_match[] = {
-	{ .compatible = "ti,ds92lx1622", },
-	{},
-};
-MODULE_DEVICE_TABLE(of, ds92lx1622_camera_of_match);
+static const struct of_device_id ds92lx1622_camera_of_match[] =
+{
+{ .compatible = "ti,ds92lx1622", },
+{ }, };
+MODULE_DEVICE_TABLE( of, ds92lx1622_camera_of_match);
 
 static const struct i2c_device_id ds92lx1622_id[] =
 {
@@ -131,7 +137,7 @@ MODULE_DEVICE_TABLE( i2c, ds92lx1622_id);
 
 static struct i2c_driver ds92lx1622_driver =
 { .probe = ds92lx1622_probe, .remove = ds92lx1622_remove, .id_table = ds92lx1622_id, .driver =
-{ .name = "ds92lx1622", .owner = THIS_MODULE,.of_match_table=of_match_ptr(ds92lx1622_camera_of_match), }, };
+{ .name = "ds92lx1622", .owner = THIS_MODULE, .of_match_table = of_match_ptr(ds92lx1622_camera_of_match), }, };
 
 module_i2c_driver( ds92lx1622_driver);
 
