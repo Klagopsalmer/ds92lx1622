@@ -12,10 +12,12 @@
 #include "ds92lx1622.h"
 #include <linux/module.h>
 #include <linux/i2c.h>
+#include <linux/delay.h>
 
 static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	s32 temp;
+	s32 i = 0;
 	s32 deviceId = i2c_smbus_read_byte_data(client, DEVICE_ID_REG_ADDR);
 	if (deviceId > 0)
 	{
@@ -24,6 +26,16 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 	else
 	{
 		pr_err("error reading ID\n");
+	}
+
+	temp = i2c_smbus_read_byte_data(client, 0x7);
+	if (temp > 0)
+	{
+		pr_info("ser id: %d\n", temp);
+	}
+	else
+	{
+		pr_err("error ser ID\n");
 	}
 
 	if (0 > i2c_smbus_write_byte_data(client, BCC_REG_ADDR, 0xE0))
@@ -35,6 +47,7 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 	{
 		pr_err("error OSS_SEL\n");
 	}
+
 	temp = i2c_smbus_read_byte_data(client, RRFB_REG_ADDR);
 	if (temp > 0)
 	{
@@ -44,6 +57,7 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 	{
 		pr_err("error RRFB\n");
 	}
+
 	//Set target
 	if (0 > i2c_smbus_write_byte_data(client, TARGET_ID_O_REG_ADDR, 0x42))
 	{
@@ -53,6 +67,17 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 	{
 		pr_err("error ALIAS_ID\n");
 	}
+
+	temp = i2c_smbus_read_byte_data(client, TARGET_ID_O_REG_ADDR);
+	if (temp > 0)
+	{
+		pr_info("target id: %d\n", temp);
+	}
+	else
+	{
+		pr_err("error target ID\n");
+	}
+
 	//Remote wake up
 	if (0 > i2c_smbus_write_byte_data(client, 0x26, 0xC0))
 	{
@@ -66,7 +91,22 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 	{
 		pr_err("error wake 2\n");
 	}
-
+/*
+	do
+	{
+		temp = i2c_smbus_read_byte_data(client, 0x1c);
+		if (temp > 0)
+		{
+			pr_info("lock: %d\n", temp);
+		}
+		else
+		{
+			pr_err("error lock\n");
+		}
+		i++;
+		mdelay(2000);
+	} while (!(temp & 0x1) && i <= 5);
+*/
 	return 0;
 }
 
@@ -75,6 +115,12 @@ static int ds92lx1622_remove(struct i2c_client *client)
 
 	return 0;
 }
+
+static const struct of_device_id ds92lx1622_camera_of_match[] = {
+	{ .compatible = "ti,ds92lx1622", },
+	{},
+};
+MODULE_DEVICE_TABLE(of, ds92lx1622_camera_of_match);
 
 static const struct i2c_device_id ds92lx1622_id[] =
 {
@@ -85,25 +131,9 @@ MODULE_DEVICE_TABLE( i2c, ds92lx1622_id);
 
 static struct i2c_driver ds92lx1622_driver =
 { .probe = ds92lx1622_probe, .remove = ds92lx1622_remove, .id_table = ds92lx1622_id, .driver =
-{ .name = "ds92lx1622", .owner = THIS_MODULE, }, };
+{ .name = "ds92lx1622", .owner = THIS_MODULE,.of_match_table=of_match_ptr(ds92lx1622_camera_of_match), }, };
 
 module_i2c_driver( ds92lx1622_driver);
-
-static int __init ds92lx1622_init(void)
-{
-	pr_info("ds92lx1622 driver loaded %s\n",__TIME__);
-	return i2c_add_driver(&ds92lx1622_driver);
-}
-
-static void __exit ds92lx1622_exit(void)
-{
-	pr_info("ds92lx1622 driver unloaded\n");
-	i2c_del_driver(&ds92lx1622_driver);
-
-}
-
-module_init( ds92lx1622_init);
-module_exit( ds92lx1622_exit);
 
 MODULE_AUTHOR("Alexandre Schnegg <aschnegg@digger.ch>");
 MODULE_DESCRIPTION("DS92LX1622 driver");
