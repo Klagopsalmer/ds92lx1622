@@ -353,6 +353,7 @@ deps_/home/schnegg/workspace/ds92lx1622/main.o := \
     $(wildcard include/config/use/percpu/numa/node/id.h) \
     $(wildcard include/config/sched/smt.h) \
   include/linux/smp.h \
+    $(wildcard include/config/up/late/init.h) \
   include/linux/llist.h \
     $(wildcard include/config/arch/have/nmi/safe/cmpxchg.h) \
   include/linux/percpu.h \
@@ -470,6 +471,7 @@ deps_/home/schnegg/workspace/ds92lx1622/main.o := \
     $(wildcard include/config/futex.h) \
     $(wildcard include/config/fault/injection.h) \
     $(wildcard include/config/latencytop.h) \
+    $(wildcard include/config/kasan.h) \
     $(wildcard include/config/function/graph/tracer.h) \
     $(wildcard include/config/uprobes.h) \
     $(wildcard include/config/bcache.h) \

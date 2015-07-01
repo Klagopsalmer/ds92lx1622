@@ -17,7 +17,6 @@
 static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	s32 temp;
-	s32 i = 0;
 	s32 deviceId = i2c_smbus_read_byte_data(client, DEVICE_ID_REG_ADDR);
 	if (deviceId > 0)
 	{
@@ -68,12 +67,6 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 		pr_err("error ALIAS_ID\n");
 	}
 
-	//Disable nack timeout
-//	if (0 > i2c_smbus_write_byte_data(client, 0x6, 0x08))
-//	{
-//		pr_err("error nack\n");
-//	}
-
 	temp = i2c_smbus_read_byte_data(client, TARGET_ID_O_REG_ADDR);
 	if (temp > 0)
 	{
@@ -97,22 +90,6 @@ static int ds92lx1622_probe(struct i2c_client *client, const struct i2c_device_i
 	{
 		pr_err("error wake 2\n");
 	}
-	/*
-	 do
-	 {
-	 temp = i2c_smbus_read_byte_data(client, 0x1c);
-	 if (temp > 0)
-	 {
-	 pr_info("lock: %d\n", temp);
-	 }
-	 else
-	 {
-	 pr_err("error lock\n");
-	 }
-	 i++;
-	 mdelay(2000);
-	 } while (!(temp & 0x1) && i <= 5);
-	 */
 	return 0;
 }
 
